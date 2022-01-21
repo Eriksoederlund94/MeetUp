@@ -37,4 +37,12 @@ describe('EvenItem component', () => {
 
         expect(buttonElement).toHaveTextContent('attend');
     });
+
+    it('Should have default CSS-class (btn-blue)', () => {
+        render(<EventItemCard {...mockEvents[0]} />);
+
+        const buttonElement = screen.getByRole('button', { name: /attend/i });
+
+        expect(buttonElement).not.toHaveClass('btn-green');
+    });
 });
