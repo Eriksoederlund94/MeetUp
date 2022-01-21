@@ -1,7 +1,15 @@
-
+import { useState } from 'react';
 
 function EventItem() {
-  return <div></div>;
+    const [isAttending, setIsAttending] = useState(false);
+
+    return (
+        <div>
+            <button onClick={() => setIsAttending(!isAttending)}>
+                {isAttending ? 'attending' : 'attend'}
+            </button>
+        </div>
+    );
 }
 
 export default EventItem;
