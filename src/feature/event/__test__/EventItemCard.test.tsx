@@ -45,4 +45,14 @@ describe('EvenItem component', () => {
 
         expect(buttonElement).not.toHaveClass('btn-green');
     });
+
+    it('Should change CSS-class to "btn-green"', () => {
+        render(<EventItemCard {...mockEvents[0]} />);
+
+        const buttonElement = screen.getByRole('button', { name: /attend/i });
+
+        userEvent.click(buttonElement);
+
+        expect(buttonElement).toHaveClass('btn-green');
+    });
 });
