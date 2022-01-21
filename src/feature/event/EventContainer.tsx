@@ -1,7 +1,12 @@
 import styled from 'styled-components';
+import EventItemList from './EventItemList';
 
 function EventContainer() {
-    return <Container></Container>;
+    return (
+        <Container>
+            <EventItemList />
+        </Container>
+    );
 }
 
 export default EventContainer;

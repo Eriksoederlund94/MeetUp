@@ -1,21 +1,23 @@
-import EventItem from '../EventItem';
+import EventItemCard from '../EventItemCard';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { mockEvents } from '../../../mockEvents';
+
 describe('EvenItem component', () => {
     it('Should render without crashing', () => {
-        render(<EventItem />);
+        render(<EventItemCard {...mockEvents[0]} />);
     });
 
     it('component contains add event button', () => {
-        render(<EventItem />);
+        render(<EventItemCard {...mockEvents[0]} />);
 
         const buttonElement = screen.getByRole('button', { name: /attend/i });
 
         expect(buttonElement).toBeInTheDocument();
     });
     it('changes from attend to attending', () => {
-        render(<EventItem />);
+        render(<EventItemCard {...mockEvents[0]} />);
 
         const buttonElement = screen.getByRole('button', { name: /attend/i });
 
@@ -25,7 +27,7 @@ describe('EvenItem component', () => {
     });
 
     it('changes from attending to attend', () => {
-        render(<EventItem />);
+        render(<EventItemCard {...mockEvents[0]} />);
 
         const buttonElement = screen.getByRole('button', { name: /attend/i });
 
