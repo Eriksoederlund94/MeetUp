@@ -17,6 +17,6 @@ export default EventItemList;
 const Container = styled.div`
     padding: 4rem;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 330px);
     gap: 1rem;
 `;

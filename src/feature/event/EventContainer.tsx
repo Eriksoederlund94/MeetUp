@@ -11,4 +11,7 @@ function EventContainer() {
 
 export default EventContainer;
 
-const Container = styled.div``;
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+`;
