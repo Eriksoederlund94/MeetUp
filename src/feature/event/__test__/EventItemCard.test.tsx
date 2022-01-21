@@ -16,6 +16,7 @@ describe('EvenItem component', () => {
 
         expect(buttonElement).toBeInTheDocument();
     });
+
     it('changes from attend to attending', () => {
         render(<EventItemCard {...mockEvents[0]} />);
 

@@ -14,4 +14,9 @@ function EventItemList() {
 
 export default EventItemList;
 
-const Container = styled.div``;
+const Container = styled.div`
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+`;
