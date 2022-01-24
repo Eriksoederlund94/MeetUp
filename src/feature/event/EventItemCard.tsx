@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { EventItem } from '../../interfaces/eventItem.interface';
 import styled from 'styled-components';
 
@@ -14,11 +14,13 @@ function EventItemCard({
     description,
     creator,
     imageUrl,
+    comments
 }: EventItem) {
     const [isAttending, setIsAttending] = useState(false);
+    const [showComments, setShowComments] = useState(false);
 
     return (
-        <Container isAttending={isAttending}>
+        <Container data-testid='event-item-container' isAttending={isAttending}>
             <div className="img-section">
                 <img src={imageUrl} alt={eventName} />
             </div>
@@ -39,7 +41,19 @@ function EventItemCard({
                 >
                     {isAttending ? 'attending' : 'attend'}
                 </button>
+                <button 
+                onClick={() => setShowComments(!showComments)}>
+                    {showComments ? 'Hide comments' : 'Show comments'}
+                </button>
             </div>
+            {showComments &&
+                <div data-testid='comment-container' className='comment-section'>
+                    <h4>Comments</h4>
+                    {comments.length > 0 && comments.map(c => (
+                        <p>{c.comment}</p>
+                    ))}
+                </div>
+            }
         </Container>
     );
 }

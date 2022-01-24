@@ -1,3 +1,9 @@
+
+export interface EventComment {
+    id: string;
+    comment: string;
+}
+
 export interface EventItem {
     id: string;
     eventName: string;
@@ -6,4 +12,5 @@ export interface EventItem {
     description: string;
     creator: string;
     imageUrl: string;
+    comments: EventComment[]
 }
