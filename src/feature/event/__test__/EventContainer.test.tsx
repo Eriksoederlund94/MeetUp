@@ -7,5 +7,6 @@ describe('EventContainer component', () => {
     // Event-container renders specific event
     it('Should render without crashing', () => {
         render(<EventContainer />);
+        const mockkedDispatch = jest.fn();
     });
 });
