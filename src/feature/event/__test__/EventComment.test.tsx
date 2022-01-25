@@ -66,10 +66,14 @@ describe('Event comment', () => {
         const buttonElement = screen.getByRole('button', {
             name: /add comment/i,
         });
+        const inputElement = screen.getByPlaceholderText('Add comment');
+
+        userEvent.type(inputElement, 'Hello');
+
         userEvent.click(buttonElement);
 
-        const inputElement = screen.getByText('Hello there!');
+        const commentElement = screen.getByText('Hello');
 
-        expect(inputElement).toBeInTheDocument();
+        expect(commentElement).toHaveTextContent('Hello');
     });
 });

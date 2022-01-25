@@ -1,4 +1,3 @@
-
 export interface EventComment {
     id: string;
     comment: string;
@@ -12,5 +11,6 @@ export interface EventItem {
     description: string;
     creator: string;
     imageUrl: string;
-    comments: EventComment[]
+    comments: EventComment[];
+    day: number;
 }

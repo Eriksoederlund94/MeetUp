@@ -1,11 +1,30 @@
 import { mockEvents } from '../../mockEvents';
 import styled from 'styled-components';
 import EventItemCard from './EventItemCard';
+import { EventItem } from '../../interfaces/eventItem.interface';
+import { useEffect, useContext } from 'react';
+import { AppContext } from '../../context/AppContext';
 
-function EventItemList() {
+interface Props {
+    sortBy: string;
+    setSortBy: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function EventItemList({ sortBy }: Props) {
+    const { state } = useContext(AppContext);
+    function sortItems(key: any) {
+        return key === 'all'
+            ? mockEvents
+            : mockEvents.sort((a: any, b: any) => a[key] - b[key]);
+    }
+
+    useEffect(() => {}, [state.sortBy]);
+
+    console.log(sortItems('creator'));
+
     return (
         <Container>
-            {mockEvents.map((item) => (
+            {sortItems(state.sortBy).map((item: any) => (
                 <EventItemCard key={item.id} {...item} />
             ))}
         </Container>
