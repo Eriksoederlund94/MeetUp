@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 import EventItemList from './EventItemList';
 
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function EventContainer() {
     const [status, setStatus] = useState('all');
 
-    function statusHandler(e: any) {
+    function statusHandler(e: React.ChangeEvent<HTMLSelectElement>): void {
         setStatus(e.target.value);
     }
-
-    useEffect(() => {}, [status]);
 
     return (
         <>

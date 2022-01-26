@@ -1,21 +1,23 @@
 import { mockEvents } from '../../mockEvents';
 import styled from 'styled-components';
 import EventItemCard from './EventItemCard';
+import { EventItem } from '../../interfaces/eventItem.interface';
 
 interface Props {
     sortBy: string;
 }
 
 function EventItemList({ sortBy }: Props) {
-    function sortItems(key: any) {
+
+    function sortItems(key: string) {
         return key === 'all'
             ? mockEvents
-            : [...mockEvents].sort((a: any, b: any) => a[key] - b[key]);
+            : [...mockEvents].sort((a: EventItem, b: EventItem) => a.day - b.day);
     }
 
     return (
         <Container>
-            {sortItems(sortBy).map((item: any) => (
+            {sortItems(sortBy).map((item: EventItem) => (
                 <EventItemCard key={item.id} {...item} />
             ))}
         </Container>
