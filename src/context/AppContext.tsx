@@ -2,8 +2,9 @@ import { createContext, useReducer } from 'react';
 import { AppAction, AppReducer } from './AppReducer';
 
 const initialState = {
-    isLoggedIn: false
-}
+    isLoggedIn: false,
+    sortBy: 'all',
+};
 
 interface AppContextProps {
     state: typeof initialState;

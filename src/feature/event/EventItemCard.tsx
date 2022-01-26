@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { EventItem } from '../../interfaces/eventItem.interface';
 import styled from 'styled-components';
+import { nanoid } from 'nanoid';
 
 interface StyleProps {
     isAttending: boolean;
@@ -14,11 +15,22 @@ function EventItemCard({
     description,
     creator,
     imageUrl,
+    comments,
 }: EventItem) {
     const [isAttending, setIsAttending] = useState(false);
+    const [showComments, setShowComments] = useState(false);
+    const [newComment, setNewComment] = useState('');
+    const inputRef = useRef<HTMLInputElement>(null);
+    function addCommentHandler() {
+        comments.push({ id: nanoid(), comment: newComment });
+        setNewComment('');
+        if (inputRef) {
+            inputRef.current!.value = '';
+        }
+    }
 
     return (
-        <Container isAttending={isAttending}>
+        <Container data-testid="event-item-container" isAttending={isAttending}>
             <div className="img-section">
                 <img src={imageUrl} alt={eventName} />
             </div>
@@ -39,7 +51,37 @@ function EventItemCard({
                 >
                     {isAttending ? 'attending' : 'attend'}
                 </button>
+                <button onClick={() => setShowComments(!showComments)}>
+                    {showComments ? 'Hide comments' : 'Show comments'}
+                </button>
+                <div></div>
             </div>
+            {showComments && (
+                <div
+                    data-testid="comment-container"
+                    className="comment-section"
+                >
+                    <input
+                        ref={inputRef}
+                        onChange={(e) => setNewComment(e.target.value)}
+                        value={newComment}
+                        type="text"
+                        placeholder="Add comment"
+                    />
+                    <button
+                        onClick={addCommentHandler}
+                        className="addComment-btn"
+                    >
+                        Add comment
+                    </button>
+                    {comments.length > 0 &&
+                        comments.map((c) => (
+                            <p data-testid={`comment-${c.id}`} key={c.id}>
+                                {c.comment}
+                            </p>
+                        ))}
+                </div>
+            )}
         </Container>
     );
 }

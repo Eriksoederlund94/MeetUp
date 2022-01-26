@@ -1,11 +1,25 @@
 import styled from 'styled-components';
 import EventItemList from './EventItemList';
 
+import React, { useState } from 'react';
+
 function EventContainer() {
+    const [status, setStatus] = useState('all');
+
+    function statusHandler(e: React.ChangeEvent<HTMLSelectElement>): void {
+        setStatus(e.target.value);
+    }
+
     return (
-        <Container>
-            <EventItemList />
-        </Container>
+        <>
+            <select onChange={statusHandler}>
+                <option value="all">All</option>
+                <option value="day">Date</option>
+            </select>
+            <Container>
+                <EventItemList sortBy={status} />
+            </Container>
+        </>
     );
 }
 
