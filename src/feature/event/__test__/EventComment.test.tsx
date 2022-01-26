@@ -46,8 +46,9 @@ describe('Event comment', () => {
         userEvent.click(buttonEle);
 
         const buttonElement = screen.getByRole('button', {
-            name: /add comment/i,
+            name: 'Comment'
         });
+
         userEvent.click(buttonElement);
 
         const inputElement = screen.getByPlaceholderText('Add comment');
@@ -57,15 +58,17 @@ describe('Event comment', () => {
 
     it('Should add a comment into the input field', () => {
         render(<EventItemCard {...mockEvents[1]} />);
+
         const buttonEle = screen.getByRole('button', {
-            name: /Show comments/i,
+            name: /Show comments/i
         });
 
         userEvent.click(buttonEle);
 
         const buttonElement = screen.getByRole('button', {
-            name: /add comment/i,
+            name: 'Comment'
         });
+        
         const inputElement = screen.getByPlaceholderText('Add comment');
 
         userEvent.type(inputElement, 'Hello');

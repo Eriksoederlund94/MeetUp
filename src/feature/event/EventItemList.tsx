@@ -12,7 +12,7 @@ function EventItemList({ sortBy }: Props) {
     function sortItems(key: string) {
         return key === 'all'
             ? mockEvents
-            : [...mockEvents].sort((a: EventItem, b: EventItem) => a.day - b.day);
+            : [...mockEvents].sort((a: EventItem, b: EventItem) => a.date.getTime() - b.date.getTime());
     }
 
     return (
@@ -27,7 +27,7 @@ function EventItemList({ sortBy }: Props) {
 export default EventItemList;
 
 const Container = styled.div`
-    padding: 4rem;
+    padding: 2rem;
     display: grid;
     grid-template-columns: repeat(3, 330px);
     gap: 1rem;

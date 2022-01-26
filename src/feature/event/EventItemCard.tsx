@@ -21,9 +21,11 @@ function EventItemCard({
     const [showComments, setShowComments] = useState(false);
     const [newComment, setNewComment] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
+
     function addCommentHandler() {
         comments.push({ id: nanoid(), comment: newComment });
         setNewComment('');
+
         if (inputRef) {
             inputRef.current!.value = '';
         }
@@ -40,17 +42,19 @@ function EventItemCard({
                     <span>By: {creator}</span>
                 </div>
                 <p>
-                    When: {date} {time}{' '}
+                    When: {date.toLocaleDateString()} {time}
                 </p>
                 {description}
             </div>
             <div className="button-section">
-                <button
-                    className={isAttending ? 'btn-green' : 'btn-blue'}
-                    onClick={() => setIsAttending(!isAttending)}
-                >
+                {date.toLocaleDateString() >= new Date().toLocaleDateString() &&     
+                    <button
+                        className={isAttending ? 'btn-green' : 'btn-blue'}
+                        onClick={() => setIsAttending(!isAttending)}
+                    >
                     {isAttending ? 'attending' : 'attend'}
-                </button>
+                    </button>
+                }
                 <button onClick={() => setShowComments(!showComments)}>
                     {showComments ? 'Hide comments' : 'Show comments'}
                 </button>
@@ -72,7 +76,7 @@ function EventItemCard({
                         onClick={addCommentHandler}
                         className="addComment-btn"
                     >
-                        Add comment
+                       Comment
                     </button>
                     {comments.length > 0 &&
                         comments.map((c) => (

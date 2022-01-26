@@ -6,11 +6,10 @@ export interface EventComment {
 export interface EventItem {
     id: string;
     eventName: string;
-    date: string;
+    date: Date;
     time: string;
     description: string;
     creator: string;
     imageUrl: string;
     comments: EventComment[];
-    day: number;
 }

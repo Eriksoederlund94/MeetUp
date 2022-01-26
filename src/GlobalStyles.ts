@@ -7,6 +7,10 @@ body {
     font-family: 'Roboto', sans-serif;
   }
 
+nav {
+  height: 70px;
+  padding: 1rem;
+}
 
 `;
 
