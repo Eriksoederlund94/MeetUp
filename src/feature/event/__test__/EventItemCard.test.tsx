@@ -6,60 +6,60 @@ import { mockEvents } from '../../../mockEvents';
 
 describe('EvenItem component', () => {
     it('Should render without crashing', () => {
-        render(<EventItemCard {...mockEvents[1]} />);
+        render(<EventItemCard {...mockEvents[3]} />);
     });
 
     it('component contains add event button', () => {
-        render(<EventItemCard {...mockEvents[1]} />);
+        render(<EventItemCard {...mockEvents[3]} />);
 
-        const buttonElement = screen.getByRole('button', { name: /attend/i });
+        const buttonElement = screen.getByRole('button', { name: 'Attend' });
 
         expect(buttonElement).toBeInTheDocument();
     });
 
-    it('changes from attend to attending', () => {
-        render(<EventItemCard {...mockEvents[1]} />);
+    it('changes from Attend to Attending', () => {
+        render(<EventItemCard {...mockEvents[3]} />);
 
-        const buttonElement = screen.getByRole('button', { name: /attend/i });
+        const buttonElement = screen.getByRole('button', { name: 'Attend' });
 
         userEvent.click(buttonElement);
 
-        expect(buttonElement).toHaveTextContent('attending');
+        expect(buttonElement).toHaveTextContent('Attending');
     });
 
-    it('changes from attending to attend', () => {
-        render(<EventItemCard {...mockEvents[1]} />);
+    it('changes from Attending to Attend', () => {
+        render(<EventItemCard {...mockEvents[3]} />);
 
-        const buttonElement = screen.getByRole('button', { name: /attend/i });
+        const buttonElement = screen.getByRole('button', { name: 'Attend' });
 
         userEvent.click(buttonElement);
         userEvent.click(buttonElement);
 
-        expect(buttonElement).toHaveTextContent('attend');
+        expect(buttonElement).toHaveTextContent('Attend');
     });
 
     it('Should have default CSS-class (btn-blue)', () => {
-        render(<EventItemCard {...mockEvents[1]} />);
+        render(<EventItemCard {...mockEvents[3]} />);
 
-        const buttonElement = screen.getByRole('button', { name: /attend/i });
+        const buttonElement = screen.getByRole('button', { name: 'Attend' });
 
         expect(buttonElement).not.toHaveClass('btn-green');
     });
 
     it('Should change CSS-class to "btn-green"', () => {
-        render(<EventItemCard {...mockEvents[1]} />);
+        render(<EventItemCard {...mockEvents[3]} />);
 
-        const buttonElement = screen.getByRole('button', { name: /attend/i });
+        const buttonElement = screen.getByRole('button', { name: 'Attend' });
 
         userEvent.click(buttonElement);
 
         expect(buttonElement).toHaveClass('btn-green');
     });
 
-    it('Should not show attend button when the event date has passed.', () => {
+    it('Should not show Attend button when the event date has passed.', () => {
         render(<EventItemCard {...mockEvents[0]} />);
 
-        const button = screen.queryByRole('button', { name: 'attend' });
+        const button = screen.queryByRole('button', { name: 'Attend' });
 
         expect(button).not.toBeInTheDocument();
     });

@@ -8,11 +8,13 @@ interface Props {
 }
 
 function EventItemList({ sortBy }: Props) {
-
     function sortItems(key: string) {
         return key === 'all'
             ? mockEvents
-            : [...mockEvents].sort((a: EventItem, b: EventItem) => a.date.getTime() - b.date.getTime());
+            : [...mockEvents].sort(
+                  (a: EventItem, b: EventItem) =>
+                      a.date.getTime() - b.date.getTime()
+              );
     }
 
     return (
@@ -29,6 +31,7 @@ export default EventItemList;
 const Container = styled.div`
     padding: 2rem;
     display: grid;
-    grid-template-columns: repeat(3, 330px);
+    grid-template-columns: repeat(3, 340px);
+    grid-template-rows: minmax(500px);
     gap: 1rem;
 `;

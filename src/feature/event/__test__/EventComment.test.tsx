@@ -1,17 +1,18 @@
-import {
-    findByPlaceholderText,
-    getByPlaceholderText,
-    render,
-    screen,
-} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import EventComment from '../../event/EventComment';
 import EventItemCard from '../../event/EventItemCard';
 import { mockEvents } from '../../../mockEvents';
 
 describe('Event comment', () => {
+    const mockComment = {
+        id: '1',
+        comment: 'Hello',
+        createdAt: 'Jan 27 2022 14:11',
+    };
+
     it('Should render without crashing', () => {
-        render(<EventComment />);
+        render(<EventComment {...mockComment} />);
     });
 
     it('Should display comment in comment section', () => {
@@ -46,7 +47,7 @@ describe('Event comment', () => {
         userEvent.click(buttonEle);
 
         const buttonElement = screen.getByRole('button', {
-            name: 'Comment'
+            name: 'Comment',
         });
 
         userEvent.click(buttonElement);
@@ -60,23 +61,23 @@ describe('Event comment', () => {
         render(<EventItemCard {...mockEvents[1]} />);
 
         const buttonEle = screen.getByRole('button', {
-            name: /Show comments/i
+            name: /Show comments/i,
         });
 
         userEvent.click(buttonEle);
 
         const buttonElement = screen.getByRole('button', {
-            name: 'Comment'
+            name: 'Comment',
         });
-        
+
         const inputElement = screen.getByPlaceholderText('Add comment');
 
         userEvent.type(inputElement, 'Hello');
 
         userEvent.click(buttonElement);
 
-        const commentElement = screen.getByText('Hello');
+        const commentElement = screen.getByText(/Hello/i);
 
-        expect(commentElement).toHaveTextContent('Hello');
+        expect(commentElement).toHaveTextContent(/Hello/i);
     });
 });

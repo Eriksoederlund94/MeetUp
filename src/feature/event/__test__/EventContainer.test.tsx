@@ -16,7 +16,7 @@ describe('EventContainer component', () => {
     it('should display correct number of options in selector', () => {
         render(<EventContainer />);
 
-        expect(screen.getAllByRole('option').length).toBe(2);
+        expect(screen.getAllByRole('option').length).toBe(3);
     });
 
     it('Should change options when selected', () => {

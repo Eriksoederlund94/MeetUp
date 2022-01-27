@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { EventItem } from '../../interfaces/eventItem.interface';
 import styled from 'styled-components';
 import { nanoid } from 'nanoid';
+import EventComment from './EventComment';
 
 interface StyleProps {
     isAttending: boolean;
@@ -23,7 +24,12 @@ function EventItemCard({
     const inputRef = useRef<HTMLInputElement>(null);
 
     function addCommentHandler() {
-        comments.push({ id: nanoid(), comment: newComment });
+        if (newComment.trim() === '') return;
+        comments.push({
+            id: nanoid(),
+            comment: newComment,
+            createdAt: new Date().toString().slice(4, 21),
+        });
         setNewComment('');
 
         if (inputRef) {
@@ -38,24 +44,32 @@ function EventItemCard({
             </div>
             <div className="event-info-section">
                 <div className="event-title-section">
-                    <p>Event: {eventName}</p>
-                    <span>By: {creator}</span>
+                    <p>
+                        <span>Event:</span> {eventName}
+                    </p>
+                    <p>
+                        <span>By:</span> {creator}
+                    </p>
                 </div>
                 <p>
-                    When: {date.toLocaleDateString()} {time}
+                    <span>When:</span> {date.toLocaleDateString()} {time}
                 </p>
                 {description}
             </div>
             <div className="button-section">
-                {date.toLocaleDateString() >= new Date().toLocaleDateString() &&     
+                {date.toLocaleDateString() >=
+                    new Date().toLocaleDateString() && (
                     <button
                         className={isAttending ? 'btn-green' : 'btn-blue'}
                         onClick={() => setIsAttending(!isAttending)}
                     >
-                    {isAttending ? 'attending' : 'attend'}
+                        {isAttending ? 'Attending' : 'Attend'}
                     </button>
-                }
-                <button onClick={() => setShowComments(!showComments)}>
+                )}
+                <button
+                    className=" btn-blue"
+                    onClick={() => setShowComments(!showComments)}
+                >
                     {showComments ? 'Hide comments' : 'Show comments'}
                 </button>
                 <div></div>
@@ -76,13 +90,11 @@ function EventItemCard({
                         onClick={addCommentHandler}
                         className="addComment-btn"
                     >
-                       Comment
+                        Comment
                     </button>
                     {comments.length > 0 &&
-                        comments.map((c) => (
-                            <p data-testid={`comment-${c.id}`} key={c.id}>
-                                {c.comment}
-                            </p>
+                        comments.map((comment) => (
+                            <EventComment key={comment.id} {...comment} />
                         ))}
                 </div>
             )}
@@ -93,8 +105,13 @@ function EventItemCard({
 export default EventItemCard;
 
 const Container = styled.div<StyleProps>`
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     border-radius: 6px;
+    background-color: #fbf6f6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+    span {
+        font-weight: bold;
+    }
 
     img {
         border-radius: 6px 6px 0px 0px;
@@ -112,18 +129,16 @@ const Container = styled.div<StyleProps>`
         align-items: center;
     }
 
-    .btn-green {
-        background: #088c45;
-        color: #fff;
-    }
-
-    .btn-blue {
-        background: #002447;
-        color: #fff;
-    }
-
     .button-section {
         padding: 1rem;
+
+        .btn-green {
+            background: #088c45;
+        }
+
+        .btn-blue {
+            background: #002447;
+        }
 
         button {
             margin-left: 1rem;
@@ -131,13 +146,53 @@ const Container = styled.div<StyleProps>`
             border-radius: 6px;
             outline: none;
             border: none;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             transition: transform 0.3s ease;
+            color: #fff;
 
             &:hover {
                 cursor: pointer;
                 transform: translateY(-1px);
             }
+        }
+    }
+
+    .comment-section {
+        overflow-y: scroll;
+        max-height: 100px;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: block;
+
+        p {
+            word-wrap: break-word;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        input {
+            all: unset;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            padding: 0.3rem;
+            width: 50%;
+        }
+
+        .addComment-btn {
+            all: unset;
+            display: inline-block;
+            padding: 0.3rem 0.5rem;
+            margin: 0 0.5rem;
+            border-radius: 8px;
+            box-sizing: border-box;
+            text-decoration: none;
+            font-weight: 300;
+            color: #ffffff;
+            background-color: #4eb5f1;
+            text-align: center;
+            transition: all 0.2s;
         }
     }
 `;

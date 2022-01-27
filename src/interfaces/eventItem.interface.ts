@@ -1,6 +1,7 @@
 export interface EventComment {
     id: string;
     comment: string;
+    createdAt: string;
 }
 
 export interface EventItem {
