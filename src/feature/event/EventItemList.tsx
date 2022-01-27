@@ -31,7 +31,16 @@ export default EventItemList;
 const Container = styled.div`
     padding: 2rem;
     display: grid;
+    max-height: 0;
     grid-template-columns: repeat(3, 340px);
-    grid-template-rows: minmax(500px);
     gap: 1rem;
+    margin-bottom: 3rem;
+
+    @media screen and (max-width: 1100px) {
+        grid-template-columns: repeat(2, 340px);
+    }
+
+    @media screen and (max-width: 800px) {
+        grid-template-columns: repeat(1, 340px);
+    }
 `;

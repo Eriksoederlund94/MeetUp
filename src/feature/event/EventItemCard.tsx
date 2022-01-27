@@ -51,10 +51,12 @@ function EventItemCard({
                         <span>By:</span> {creator}
                     </p>
                 </div>
-                <p>
-                    <span>When:</span> {date.toLocaleDateString()} {time}
-                </p>
-                {description}
+                <div className="when-description-section">
+                    <p>
+                        <span>When:</span> {date.toLocaleDateString()} {time}
+                    </p>
+                    <p>{description} </p>
+                </div>
             </div>
             <div className="button-section">
                 {date.toLocaleDateString() >=
@@ -129,8 +131,14 @@ const Container = styled.div<StyleProps>`
         align-items: center;
     }
 
+    .when-description-section {
+        min-height: 180px;
+    }
+
     .button-section {
         padding: 1rem;
+        display: flex;
+        justify-content: space-between;
 
         .btn-green {
             background: #088c45;
@@ -141,7 +149,6 @@ const Container = styled.div<StyleProps>`
         }
 
         button {
-            margin-left: 1rem;
             padding: 0.2rem 0.5rem;
             border-radius: 6px;
             outline: none;
@@ -178,6 +185,7 @@ const Container = styled.div<StyleProps>`
             border-radius: 4px;
             padding: 0.3rem;
             width: 50%;
+            margin-bottom: 0.2rem;
         }
 
         .addComment-btn {

@@ -22,10 +22,10 @@ const NavBarWrapper = styled.nav`
     .logo {
         width: 8rem;
         height: 8rem;
+        cursor: default;
 
         h1 {
             font-size: 1.5rem;
-            border: 2px solid #ccc;
             text-align: center;
             font-family: 'Quicksand', sans-serif;
         }

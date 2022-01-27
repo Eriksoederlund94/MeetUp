@@ -15,11 +15,11 @@ function EventContainer() {
             <Container>
                 <h3>Sort events</h3>
                 <select onChange={statusHandler}>
-                    <option value=''>-- Sort by --</option>
+                    <option value="">-- Sort by --</option>
                     <option value="all">All</option>
                     <option value="day">Date</option>
                 </select>
-                <div className='event-item-list'>
+                <div className="event-item-list">
                     <EventItemList sortBy={status} />
                 </div>
             </Container>
@@ -34,7 +34,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
+
     select {
         width: 130px;
         font-size: 1rem;
@@ -47,5 +47,6 @@ const Container = styled.div`
     .event-item-list {
         display: flex;
         justify-content: center;
+        min-height: 100vh;
     }
 `;
