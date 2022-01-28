@@ -1,7 +1,7 @@
 import { mockEvents } from '../../mockEvents';
-import styled from 'styled-components';
 import EventItemCard from './EventItemCard';
 import { EventItem } from '../../interfaces/eventItem.interface';
+import styled from 'styled-components';
 
 interface Props {
     sortBy: string;
@@ -31,6 +31,7 @@ function EventItemList({ sortBy }: Props) {
             {sortItems(sortBy).map((item: EventItem) => (
                 <EventItemCard key={item.id} {...item} />
             ))}
+            <br />
         </Container>
     );
 }
