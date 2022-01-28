@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { EventItem } from '../../interfaces/eventItem.interface';
 import styled from 'styled-components';
 import { nanoid } from 'nanoid';
@@ -9,7 +9,6 @@ interface StyleProps {
 }
 
 function EventItemCard({
-    id,
     eventName,
     date,
     time,
@@ -23,13 +22,17 @@ function EventItemCard({
     const [newComment, setNewComment] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
 
-    function addCommentHandler() {
+    function addCommentHandler(e: React.FormEvent) {
+        e.preventDefault();
+
         if (newComment.trim() === '') return;
+
         comments.push({
             id: nanoid(),
             comment: newComment,
             createdAt: new Date().toString().slice(4, 21),
         });
+        
         setNewComment('');
 
         if (inputRef) {
@@ -81,6 +84,7 @@ function EventItemCard({
                     data-testid="comment-container"
                     className="comment-section"
                 >
+                    <form onSubmit={addCommentHandler}>
                     <input
                         ref={inputRef}
                         onChange={(e) => setNewComment(e.target.value)}
@@ -94,6 +98,7 @@ function EventItemCard({
                     >
                         Comment
                     </button>
+                    </form>
                     {comments.length > 0 &&
                         comments.map((comment) => (
                             <EventComment key={comment.id} {...comment} />
@@ -173,6 +178,30 @@ const Container = styled.div<StyleProps>`
         justify-content: center;
         display: block;
 
+        p > span {
+            font-weight: 300;
+            color: #000;
+        }
+
+        p {
+            color: #666666;
+        }
+
+        &::-webkit-scrollbar {
+            width: 0.4em;
+        }
+        
+        &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background-color: #4eb5f1;
+            outline: 1px solid slategrey;
+            border-radius: 4px;
+        }
+
         p {
             word-wrap: break-word;
             padding: 0.5rem;
@@ -186,6 +215,10 @@ const Container = styled.div<StyleProps>`
             padding: 0.3rem;
             width: 50%;
             margin-bottom: 0.2rem;
+
+            &::-webkit-input-placeholder {
+                color: #333;
+            }
         }
 
         .addComment-btn {
@@ -201,6 +234,11 @@ const Container = styled.div<StyleProps>`
             background-color: #4eb5f1;
             text-align: center;
             transition: all 0.2s;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #5099c4;
+            }
         }
     }
 `;

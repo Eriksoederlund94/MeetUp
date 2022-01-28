@@ -25,6 +25,6 @@ describe('EventContainer component', () => {
         const optionElement = screen.getByRole('option', { name: 'All' });
         userEvent.selectOptions(selectElement, optionElement);
 
-        expect(optionElement).toBeInTheDocument();
+        expect(optionElement).toHaveValue('all');
     });
 });

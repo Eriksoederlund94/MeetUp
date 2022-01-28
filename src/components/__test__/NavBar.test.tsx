@@ -14,7 +14,7 @@ describe('NavBar', () => {
         expect(navBarHeaderElement).toHaveTextContent('MeetUp');
     });
 
-    it('Should render same text passed into the title prop', () => {
+    it('Should not render same text passed into the title prop', () => {
         render(<NavBar title="MeetUp" />);
 
         const navBarHeaderElement = screen.getByRole('heading');

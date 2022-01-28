@@ -57,14 +57,14 @@ describe('Event comment', () => {
         expect(inputElement).toBeInTheDocument();
     });
 
-    it('Should add a comment into the input field', () => {
+    it('Should add a new comment in the comment section', () => {
         render(<EventItemCard {...mockEvents[1]} />);
 
-        const buttonEle = screen.getByRole('button', {
+        const showCommentBtn = screen.getByRole('button', {
             name: /Show comments/i,
         });
 
-        userEvent.click(buttonEle);
+        userEvent.click(showCommentBtn);
 
         const buttonElement = screen.getByRole('button', {
             name: 'Comment',

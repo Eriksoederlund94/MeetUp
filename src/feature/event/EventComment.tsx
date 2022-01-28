@@ -10,7 +10,7 @@ function EventComment({ id, comment, createdAt }: Props) {
     return (
         <Container>
             <p data-testid={`comment-${id}`}>
-                {createdAt}: {comment}
+                <span>{createdAt}</span>: {comment}
             </p>
         </Container>
     );
