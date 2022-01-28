@@ -8,13 +8,22 @@ interface Props {
 }
 
 function EventItemList({ sortBy }: Props) {
+    // function sortItems(key: string) {
+    //     return key === 'all' || ''
+    //         ? mockEvents
+    //         : [...mockEvents].sort(
+    //               (a: EventItem, b: EventItem) =>
+    //                   a.date.getTime() - b.date.getTime()
+    //           );
+    // }
+
     function sortItems(key: string) {
-        return key === 'all'
-            ? mockEvents
-            : [...mockEvents].sort(
+        return key === 'day'
+            ? [...mockEvents].sort(
                   (a: EventItem, b: EventItem) =>
                       a.date.getTime() - b.date.getTime()
-              );
+              )
+            : mockEvents;
     }
 
     return (
